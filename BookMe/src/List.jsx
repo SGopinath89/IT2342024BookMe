@@ -1,4 +1,9 @@
+import { useState } from "react";
 function List() {
+  const [value, setValue] = useState("");
+  const onChange = (event) => {
+    setValue(even.target.value);
+  };
   return (
     <>
       <div className="ListDiv">
@@ -6,7 +11,12 @@ function List() {
       </div>
       <div className="DivofList">
         <div className="fromDiv">
-          <p className="fromText">From</p>
+          <input
+            type="text"
+            placeholder="From"
+            value={value}
+            onChange={onChange}
+          />
         </div>
         <div className="fromTo">
           <p className="fromText">To</p>
