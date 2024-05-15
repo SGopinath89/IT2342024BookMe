@@ -1,4 +1,5 @@
-import logo from "C:/Users/Wolverine/Documents/Bus/IT2342024BookMe/BookMe/src/assets/Bus.png";
+import logo from "/Users/Hp/OneDrive/Documents/GitHub/IT2342024BookMe/BookMe/src/assets/Bus.png";
+
 function Header() {
   return (
     <>

@@ -159,3 +159,10 @@ body {
   font-weight: 600px;
   font-size: 14px;
 }
+
+.TicketDiv {
+  width: 289.882px;
+  height: 601.803px;
+  transform: rotate(-0.104deg);
+  flex-shrink: 0;
+}
