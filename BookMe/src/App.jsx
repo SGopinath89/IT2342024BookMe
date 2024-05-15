@@ -1,13 +1,19 @@
 import Body from "./Components/Body";
 import Header from "./Components/Header";
-
-function App() {
+import { BrowserRouter as Router, Routes } from "react-router-dom";
+import List from "./Components/List";
+const App = () => {
   return (
     <>
       <Header />
-      <Body />
+      <Body>
+        <List />
+      </Body>
+      <Router>
+        <Routes path="/" exact></Routes>
+      </Router>
     </>
   );
-}
+};
 
 export default App;
