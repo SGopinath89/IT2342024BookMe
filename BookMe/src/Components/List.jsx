@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Body from "./Body";
 function List() {
   const [value, setValue] = useState("");
   const onChange = (event) => {
