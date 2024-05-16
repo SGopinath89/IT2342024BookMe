@@ -23,8 +23,8 @@ function List() {
           <p className="fromText">To</p>
         </div>
         <div className="datediv"></div>
+        <button className="BtnSearchBuses">Search Buses</button>
       </div>
-      <button className="BtnSearchBuses">Search Buses</button>
     </>
   );
 }
