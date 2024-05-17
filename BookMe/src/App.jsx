@@ -10,6 +10,7 @@ const App = () => {
       <Header />
       <Body>
         <List />
+        <Ticket></Ticket>
       </Body>
       <Router>
         <Routes path="/" exact></Routes>
