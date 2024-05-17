@@ -1,7 +1,11 @@
+import { line } from "./assets/Line.png";
 function Ticket() {
   return (
     <>
-      <div className="TicketDiv"></div>
+      <div className="TicketDiv">
+        <img className="lineIcon" src={line} alt="Image" />
+        <div className="LineDiv"></div>
+      </div>
     </>
   );
 }
