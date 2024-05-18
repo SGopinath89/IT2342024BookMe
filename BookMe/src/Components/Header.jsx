@@ -1,4 +1,5 @@
-import logo from "./assets/Bus.png";
+import { Outlet } from "react-router-dom";
+import logo from "./assets/Bus.svg";
 
 function Header() {
   return (
@@ -25,6 +26,7 @@ function Header() {
           </button>
         </nav>
       </header>
+      <Outlet></Outlet>
     </>
   );
 }
