@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Body from "./Body";
+import Ticket from "./Ticket";
 function List() {
   const [value, setValue] = useState("");
   const onChange = (event) => {
