@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 nav {
-  position: sticky;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -11,12 +11,10 @@ nav {
   display: flex;
   align-items: center;
   transition: 0.3s ease-out;
-  backdrop-filter: blur(8px) brightness(1.2);
-  -webkit-backdrop-filter: blur(8px) brightness(1.2);
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  color: rgb(0, 0, 0);
   font-size: 20px;
-  background-color: rgb(255, 255, 255);
+  -webkit-backdrop-filter: blur(100px) brightness(100%);
+  backdrop-filter: blur(100px) brightness(100%);
+  background-color: transparent;
   font-family: "Poppins";
 }
 
@@ -58,7 +56,8 @@ a {
   height: 100px;
 }
 .Box {
-  height: 570px;
+  height: 745px;
+
   width: 100%;
   background: linear-gradient(
     180deg,
@@ -67,6 +66,7 @@ a {
     rgba(115, 115, 115, 1) 100%
   );
 }
+
 .BusImg {
   top: 100px;
   position: absolute;
@@ -86,23 +86,7 @@ a {
 body {
   margin: 0%;
 }
-.ListDiv {
-  background-color: #ea4f4e;
-  width: 1100px;
-  height: 40px;
-  border-radius: 5px;
-  font-family: "Poppins-SemiBold", Helvetica;
-  color: #ffff;
-  font-weight: 600px;
-  font-size: 20px;
-  position: absolute;
-  top: 30%;
-  left: 15%;
-  padding: 0%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .DivofList {
   background-color: #ffffff;
   width: 1100px;
@@ -115,39 +99,57 @@ body {
   left: 15%;
   display: flex;
 }
+.inputDeparture {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  border-color: #000000;
+  border-radius: 5px;
+  font-family: "Poppins-Regular", Helvetica;
+}
+.inputArrival {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  border-color: #000000;
+  border-radius: 5px;
+  font-family: "Poppins-Regular", Helvetica;
+}
 .fromDiv {
   background-color: #d9d9d9;
   width: 200px;
   height: 40px;
-  position: relative;
+  position: absolute;
   top: 20%;
-  left: 3%;
+  left: 5%;
   border-radius: 5px;
 }
-.fromText {
-  text-align: left;
-  bottom: 25%;
-  left: 20%;
-  font-family: "Poppins-Regular", Helvetica;
-  position: relative;
-  color: #4e4e4e;
-}
-.fromTo {
+.toDiv {
   background-color: #d9d9d9;
   width: 200px;
   height: 40px;
-  position: relative;
+  position: absolute;
   top: 20%;
-  left: 13%;
+  left: 30%;
   border-radius: 5px;
+  text-align: center;
 }
+.Dateinput {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  border-color: #000000;
+  border-radius: 5px;
+  font-family: "Poppins-Regular", Helvetica;
+}
+
 .datediv {
   background-color: #d9d9d9;
   width: 200px;
   height: 40px;
   position: relative;
   top: 20%;
-  left: 23%;
+  left: 55%;
   border-radius: 5px;
 }
 .BtnSearchBuses {
@@ -157,7 +159,7 @@ body {
   height: 40px;
   width: 160px;
   top: 20%;
-  right: 3%;
+  right: 5%;
   border-radius: 5px;
   font-family: "Poppins-SemiBold", Helvetica;
   font-weight: 600px;
@@ -165,51 +167,861 @@ body {
 }
 
 .TicketDiv {
-  width: 289.882px;
-  height: 601.803px;
+  width: 250px;
+  height: 550px;
   transform: rotate(-0.104deg);
   flex-shrink: 0;
   background-color: rgba(231, 220, 220, 0.76);
-  border-radius: 40px;
+  border-radius: 35px;
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 40%;
+  top: 17%;
 }
 .LineDiv {
   width: 1px;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.57);
-  height: 457.3px;
-  left: 70%;
+  height: 422px;
+  left: 75%;
   top: 0%;
 }
 .lineIcon {
-  width: 290px;
+  width: 250px;
   position: relative;
   overflow: hidden;
-  height: 200px;
-  object-fit: contain;
-  top: 60%;
+  height: 20px;
+  object-fit: fill;
+  top: 75%;
   opacity: 0.6;
 }
 .ellipseLeft {
   background-color: #ffffff;
-  border-radius: 22.5px;
-  height: 45px;
-  left: -25px;
+  border-radius: 22.5px 22.5px 0 0;
+  height: 25px;
+  left: -10px;
   position: absolute;
-  top: 72.5%;
-  transform: rotate(-0.15deg);
+  top: 74.5%;
+  transform: rotate(90deg);
   width: 45px;
 }
 
 .ellipseRight {
   background-color: #ffffff;
-  border-radius: 22.5px;
-  height: 45px;
-  right: -25px;
+  border-radius: 22.5px 22.5px 0 0;
+  height: 25px;
+  right: -10px;
   position: absolute;
-  top: 72.5%;
-  transform: rotate(-0.15deg);
+  top: 74.5%;
+  transform: rotate(270deg);
   width: 45px;
+}
+.Barpng {
+  height: 70px;
+  left: 2%;
+  text-align: center;
+  position: fixed;
+  top: 82%;
+  width: 240px;
+}
+
+input {
+  width: 150px;
+  font-family: "Poppins-Regular", Helvetica;
+}
+.searchResults {
+  display: block;
+  position: absolute;
+  left: 5%;
+  top: 20%;
+  padding: 1px;
+}
+.ListDiv1 {
+  background-color: #ea4f4e;
+  width: 1000px;
+  height: 40px;
+  border-radius: 5px;
+  font-family: "Poppins-SemiBold", Helvetica;
+  color: #ffff;
+  font-weight: 600px;
+  font-size: 20px;
+  position: absolute;
+  top: -27%;
+  left: 0%;
+  padding: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.busDetails {
+  margin-bottom: 50px;
+  position: relative;
+  top: 50%;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  height: 150px;
+  width: 1000px;
+  left: 20%;
+}
+.busId {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 10%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  color: #4e4e4e;
+}
+.busId-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 11.5%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 25%;
+}
+.DepatureCity {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 25%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  color: #4e4e4e;
+}
+.DepatureCity-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 27%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 25%;
+}
+.Departure_Time {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 45%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  color: #4e4e4e;
+}
+.Departure_Time-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 48%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 25%;
+}
+.Arrival_City {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 10%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  color: #4e4e4e;
+}
+.Arrival_City-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 12%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 55%;
+}
+.Arrival_Time {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 25%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  color: #4e4e4e;
+}
+.Arrival_Time-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  left: 27%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 55%;
+}
+
+.BusRoute {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  right: 3%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+  color: #ffffff;
+}
+.BusRoute-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  right: 2%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+}
+
+.Price {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  height: 40px;
+  left: 65%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  color: #4e4e4e;
+}
+.Price-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  height: 40px;
+  left: 62%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+}
+
+.Seats {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  height: 40px;
+  left: 82%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 75%;
+  color: #4e4e4e;
+}
+.Seats-Text {
+  font-family: "Poppins-SemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  height: 40px;
+  left: 96%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 75%;
+  color: #ea4f4e;
+}
+.btnBookSeat {
+  font-family: "Poppins-SemiBold", Helvetica;
+  position: absolute;
+  left: 85%;
+  top: 35%;
+  width: 120px;
+  background-color: #ea4f4e;
+  height: 40px;
+  border: 1px solid;
+  border-color: #ffffff;
+  color: #ffffff;
+  border-radius: 6px;
+  justify-content: center;
+  text-align: center;
+  padding-top: 10px;
+}
+/* Container styling */
+.seat-booking-container {
+  text-align: center;
+  margin: 20px;
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  -webkit-backdrop-filter: blur(25px) brightness(100%);
+  backdrop-filter: blur(25px) brightness(100%);
+  background-color: #5782c147;
+  border-radius: 40px;
+  height: 400px;
+  width: 800px;
+  font-family: "Poppins-SemiBold", Helvetica;
+}
+
+/* Grid layout for seats */
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+/* Basic styling for each seat */
+.seat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for available seats */
+.seat.available {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Styling for booked seats */
+.seat.booked {
+  background-color: #f44336;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Hover effect for seats */
+.seat.available:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(39, 115, 255, 0.2);
+  background-color: #0056b3;
+}
+
+/* Active state for seats */
+.seat:active {
+  transform: scale(1);
+  box-shadow: 0 2px 4px rgba(105, 94, 94, 0.1);
+}
+
+/* Selected seat styling */
+.seat.selected {
+  border: 2px solid #2196f3;
+  background-color: #063b81;
+}
+
+/* Message for selected seat */
+.selected-seat-message {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Proceed button styling */
+.btnProceed {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btnProceed:hover {
+  background-color: #1e88e5;
+}
+
+/* Container styling */
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 500px;
+  top: 15%;
+  left: 30%;
+  -webkit-backdrop-filter: blur(25px) brightness(100%);
+  backdrop-filter: blur(25px) brightness(100%);
+  background-color: #5782c147;
+  border-radius: 40px;
+  font-family: "Poppins-SemiBold", Helvetica;
+}
+
+/* Form styling */
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Poppins", Helvetica;
+}
+
+/* Button styling */
+.btnSubmit {
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  font-family: "Poppins-SemiBold", Helvetica;
+}
+
+.btnSubmit:hover {
+  background-color: #1e88e5;
+}
+
+/* Page title styling */
+.payment-container h2 {
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+button:hover {
+  background-color: #555;
+  color: black;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White shadow */
+  cursor: pointer;
+}
+
+/* Paragraph styling */
+.payment-container p {
+  margin: 5px 0;
+  color: #666;
+}
+/* Container styling */
+.ticket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Page title styling */
+.ticket-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Paragraph styling */
+.ticket-container p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Strong text styling */
+.ticket-container strong {
+  color: #000;
+}
+
+.ticBusId {
+  color: #000000;
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  height: 21px;
+  right: 2%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 5%;
+  transform: rotate(89.89deg);
+}
+.ticDeparture {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 15%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 15%;
+  transform: rotate(89.89deg);
+}
+.ticArrival {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 20%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 64%;
+  transform: rotate(89.89deg);
+}
+
+.ticDepartureTime {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 40%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 14%;
+  transform: rotate(89.89deg);
+}
+
+.ticArrivalTime {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 42%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 64%;
+  transform: rotate(89.89deg);
+}
+.ticRoueNo {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 12%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 67%;
+  transform: rotate(89.89deg);
+}
+.ticPrice {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 63%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: fixed;
+  text-align: center;
+  top: 9%;
+  transform: rotate(89.89deg);
+}
+.ticSeatNo {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 65%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 62%;
+  transform: rotate(89.89deg);
+}
+.logoImage {
+  height: 60px;
+  left: 72%;
+  object-fit: cover;
+  position: fixed;
+  top: 35%;
+  width: 80px;
+  transform: rotate(89.89deg);
+  opacity: 0.6;
+}
+.backgImage {
+  height: 150px;
+  left: 0%;
+  object-fit: fill;
+  position: fixed;
+  top: 30%;
+  width: 200px;
+  transform: rotate(89.89deg);
+  opacity: 0.7;
+}
+.signup-container {
+  -webkit-backdrop-filter: blur(25px) brightness(100%);
+  backdrop-filter: blur(25px) brightness(100%);
+  background-color: #5782c147;
+  border-radius: 40px;
+  height: 400px;
+  left: 40%;
+  position: absolute;
+  top: 25%;
+  width: 400px;
+  text-align: center;
+  justify-content: center;
+}
+.login-container {
+  -webkit-backdrop-filter: blur(25px) brightness(100%);
+  backdrop-filter: blur(25px) brightness(100%);
+  background-color: #5782c147;
+  border-radius: 40px;
+  height: 350px;
+  left: 40%;
+  position: absolute;
+  top: 25%;
+  width: 400px;
+  text-align: center;
+  justify-content: center;
+}
+
+.signup-container h2,
+.login-container h2 {
+  text-align: center;
+  font-family: "Poppins", Helvetica;
+  color: #ccc;
+}
+
+.signup-container form,
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-container label {
+  margin-bottom: 20px;
+  font-family: "Poppins", Helvetica;
+  color: #ffffff;
+}
+.login-container label {
+  margin-bottom: 20px;
+  font-family: "Poppins", Helvetica;
+  color: #ffffff;
+}
+.labelemail {
+  position: absolute;
+  left: 26%;
+  bottom: 232px;
+}
+.labelpassword {
+  position: absolute;
+  left: 26%;
+  bottom: 162px;
+}
+.inputemail {
+  position: absolute;
+  left: 1%;
+}
+.inputpassword {
+  position: absolute;
+  left: 1%;
+}
+.signup-container input {
+  margin-bottom: 20px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border: transparent;
+  width: 200px;
+  right: 5%;
+  position: absolute;
+}
+.login-container input {
+  margin-bottom: 20px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border: transparent;
+  width: 200px;
+  right: 5%;
+  position: relative;
+}
+.btnLogin {
+  background-color: #000000;
+  border: solid 1px #ffffff;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  text-align: center;
+  margin-left: 26%;
+  position: absolute;
+  top: 65%;
+}
+.LinkSignup {
+  left: 80px;
+  top: 83%;
+  position: absolute;
+  font-style: italic;
+  font-family: "Poppins", Helvetica;
+}
+.signup-container button {
+  padding: 10px;
+
+  color: white;
+
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  text-align: center;
+}
+
+.labelEmail {
+  position: absolute;
+  top: 40%;
+  left: 25%;
+}
+.labelPass {
+  position: absolute;
+  left: 25%;
+  top: 62%;
+}
+.labelName {
+  position: absolute;
+  top: 18%;
+  left: 25%;
+}
+.inputName {
+  position: absolute;
+  font-family: "Poppins", Helvetica;
+  left: 25%;
+  top: 23%;
+}
+.inputEmail {
+  position: absolute;
+  font-family: "Poppins", Helvetica;
+  left: 25%;
+  top: 45%;
+}
+.inputPass {
+  position: absolute;
+  font-family: "Poppins", Helvetica;
+  left: 25%;
+  top: 67%;
+}
+.btnSign {
+  position: absolute;
+  font-family: "Poppins", Helvetica;
+  right: 25%;
+  top: 80%;
+  background-color: #000000;
+  border: solid 1px #ffffff;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  text-align: center;
+}
+.signup-container button:hover,
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+.Already {
+  left: 100px;
+  top: 93%;
+  position: absolute;
+  font-style: italic;
+  font-family: "Poppins", Helvetica;
+}
+.error {
+  color: red;
+  text-align: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info span {
+  margin-right: 30px;
+  font-size: 18px;
+  color: #000000;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.dropd {
+  position: absolute;
+  left: 400px;
+  top: 100px;
+  width: 100px;
+  background-color: #0056b3;
+  height: 100px;
 }
