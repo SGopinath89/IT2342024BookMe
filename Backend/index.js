@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const busModel = require("./Models/Bus.js");
-const ReservationModel = require("./Models/Reservation.js");
+
 const mongoDBUrl = "mongodb://127.0.0.1:27017/BookMe";
 const Booking = require("./Models/BookingSchema.js");
 const Seat = require("./Models/Seat.js");
 const authRoutes = require("./routes/auth.js");
-
+const Reservation = require("./Models/reservationModel.js");
 const port = 8080;
 const app = express();
 app.use(bodyParser.json());
@@ -175,6 +175,59 @@ app.get("/cities", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+app.post("/book-seat", async (req, res) => {
+  const { busId, seatNumber, userId } = req.body;
+
+  try {
+    // Find the bus by ID
+    const bus = await busModel.findById(busId).populate("seats");
+
+    if (!bus) {
+      return res.status(404).json({ message: "Bus not found" });
+    }
+
+    // Find the seat by seatNumber
+    const seat = await Seat.findOne({ busId, seatNumber });
+
+    if (!seat) {
+      return res.status(404).json({ message: "Seat not found" });
+    }
+
+    // Check if the seat is already booked
+    if (seat.isBooked) {
+      return res.status(400).json({ message: "Seat already booked" });
+    }
+
+    // Create a reservation
+    const referenceNumber = generateUniqueReference(); // Implement this function
+    const reservation = new Reservation({
+      busId,
+      seatNumber,
+      userId,
+      referenceNumber,
+    });
+    await reservation.save();
+
+    // Update the seat status and reference to the reservation
+    seat.isBooked = true;
+    seat.bookedBy = userId;
+    seat.reservation = reservation._id;
+    await seat.save();
+
+    res
+      .status(200)
+      .json({ message: "Seat successfully booked", referenceNumber });
+  } catch (error) {
+    console.error("Error booking seat:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Function to generate a unique reference number (example implementation)
+function generateUniqueReference() {
+  return Math.random().toString(36).substr(2, 9); // Example of generating a random alphanumeric string
+}
+
 // Endpoint to add a new bus
 app.post("/buses", async (req, res) => {
   const {

@@ -24,7 +24,10 @@ function SeatBooking() {
   }, [busId]);
 
   const handleSeatClick = (seatNumber) => {
-    setSelectedSeat(seatNumber);
+    const selected = seats.find((seat) => seat.seatNumber === seatNumber);
+    if (!selected.isBooked) {
+      setSelectedSeat(seatNumber);
+    }
   };
 
   const handleProceedClick = () => {
