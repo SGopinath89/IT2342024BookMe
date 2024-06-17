@@ -10,6 +10,7 @@ import Ticket from "./Components/Ticket";
 import Signup from "./Components/Signup";
 import Login from "./Components/Login";
 import { AuthProvider } from "./AuthContext";
+import AuthRoute from "./Auth/AuthRoute";
 
 function App() {
   const [searchCriteria, setSearchCriteria] = useState(null);
@@ -18,51 +19,61 @@ function App() {
     {
       path: "/",
       element: (
-        <>
-          <Header />
-          <Body />
-          <List setSearchCriteria={setSearchCriteria} />
-        </>
+        <AuthRoute>
+          <>
+            <Header />
+            <Body />
+            <List setSearchCriteria={setSearchCriteria} />
+          </>
+        </AuthRoute>
       ),
     },
     {
       path: "/search-result",
       element: (
-        <>
-          <Header />
-          <Body />
-          <BusList searchCriteria={searchCriteria} />
-        </>
+        <AuthRoute>
+          <>
+            <Header />
+            <Body />
+            <BusList searchCriteria={searchCriteria} />
+          </>
+        </AuthRoute>
       ),
     },
     {
       path: "/seat-booking/:busId",
       element: (
-        <>
-          <Header />
-          <Body />
-          <SeatBooking />
-        </>
+        <AuthRoute>
+          <>
+            <Header />
+            <Body />
+            <SeatBooking />
+          </>
+        </AuthRoute>
       ),
     },
     {
       path: "/payment",
       element: (
-        <>
-          <Header />
-          <Body />
-          <Payment />
-        </>
+        <AuthRoute>
+          <>
+            <Header />
+            <Body />
+            <Payment />
+          </>
+        </AuthRoute>
       ),
     },
     {
       path: "/ticket",
       element: (
-        <>
-          <Header />
-          <Body />
-          <Ticket />
-        </>
+        <AuthRoute>
+          <>
+            <Header />
+            <Body />
+            <Ticket />
+          </>
+        </AuthRoute>
       ),
     },
     {

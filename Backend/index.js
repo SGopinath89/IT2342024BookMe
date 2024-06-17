@@ -133,7 +133,17 @@ app.post("/searchBuses", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
+// Endpoint to get bookings for the logged-in user
+// app.get("/my-bookings", authenticateJWT, async (req, res) => {
+//   try {
+//     const bookings = await Booking.find({ bookedBy: req.user.id }).populate(
+//       "busId"
+//     );
+//     res.json(bookings);
+//   } catch (error) {
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 // Get bus details by ID
 app.get("/bus/:busId", async (req, res) => {
   const { busId } = req.params;

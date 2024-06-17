@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "./assets/Bus.svg";
 import { Outlet } from "react-router-dom";
 import AuthContext from "../AuthContext";
@@ -39,10 +39,18 @@ function Header() {
     <>
       <header>
         <nav>
-          <img className="logo" src={logo} alt="Bus Logo" />
+          <img
+            className="logo"
+            src={logo}
+            alt="Bus Logo"
+            onClick={() =>
+              isAuthenticated ? navigate("/") : navigate("/login")
+            }
+            style={{ cursor: "pointer" }}
+          />
           <ul className="list">
             <li>
-              <a href="#">Dashboard</a>
+              <Link to="/">Dashboard</Link>
             </li>
             <li>
               <a href="#">Bus TimeTable</a>
