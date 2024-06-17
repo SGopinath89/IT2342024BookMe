@@ -1,16 +1,28 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function Payment() {
   const navigate = useNavigate();
   const location = useLocation();
   const { busId, seatNumber } = location.state;
+  const userId = "60b7be9f2e35f10654a24b6c"; // Replace this with the actual logged-in user's ID
 
-  const handlePaymentSubmit = (e) => {
+  const handlePaymentSubmit = async (e) => {
     e.preventDefault();
-    // Add your payment handling logic here
     console.log("Payment submitted");
-    navigate("/ticket", { state: { busId, seatNumber } });
+
+    try {
+      await axios.post("http://localhost:8080/book-seat", {
+        busId,
+        seatNumber,
+        userId,
+      });
+
+      navigate("/ticket", { state: { busId, seatNumber } });
+    } catch (error) {
+      console.error("Error booking seat:", error);
+    }
   };
 
   return (

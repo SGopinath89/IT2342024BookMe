@@ -175,6 +175,41 @@ app.get("/cities", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+app.post("/book-seat", async (req, res) => {
+  const { busId, seatNumber, userId } = req.body;
+
+  try {
+    // Find the bus by ID
+    const bus = await busModel.findById(busId).populate("seats");
+
+    if (!bus) {
+      return res.status(404).json({ message: "Bus not found" });
+    }
+
+    // Find the seat by seatNumber
+    const seat = await Seat.findOne({ busId, seatNumber });
+
+    if (!seat) {
+      return res.status(404).json({ message: "Seat not found" });
+    }
+
+    // Check if the seat is already booked
+    if (seat.isBooked) {
+      return res.status(400).json({ message: "Seat already booked" });
+    }
+
+    // Update the seat status and bookedBy
+    seat.isBooked = true;
+    seat.bookedBy = userId;
+    await seat.save();
+
+    res.status(200).json({ message: "Seat successfully booked" });
+  } catch (error) {
+    console.error("Error booking seat:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // Endpoint to add a new bus
 app.post("/buses", async (req, res) => {
   const {
