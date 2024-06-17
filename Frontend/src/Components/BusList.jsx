@@ -58,9 +58,8 @@ function BusList() {
             </div>
             <div className="busDetailRow">
               <label className="Seats">Available Seats: </label>
-              <span className="Seats-Text">{bus.Seat_No}</span>
+              <span className="Seats-Text">{bus.availableSeats}</span>
             </div>
-            {/* Other bus details */}
             <Link to={`/seat-booking/${bus._id}`} className="btnBookSeat">
               Book Seat
             </Link>

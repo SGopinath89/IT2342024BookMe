@@ -105,30 +105,35 @@ app.get("/getBuses", async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+// Search buses endpoint
 app.post("/searchBuses", async (req, res) => {
-  const { departureCity, arrivalCity, travelDate } = req.body;
-
-  // console.log("Search criteria:", { departureCity, arrivalCity, travelDate });
+  const { departureCity, arrivalCity } = req.body;
 
   try {
+    // Find buses that match the search criteria
     const buses = await busModel.find({
-      Departure_City: { $regex: new RegExp(departureCity, "i") },
-      Arrival_City: { $regex: new RegExp(arrivalCity, "i") },
-      Travel_Date: travelDate,
+      Departure_City: departureCity,
+      Arrival_City: arrivalCity,
     });
 
-    if (buses.length === 0) {
-      console.log("No buses found matching the criteria.");
-    } else {
-      //console.log("Found buses:", buses);
-    }
+    // Aggregate available seats for each bus
+    const busDetailsWithSeats = await Promise.all(
+      buses.map(async (bus) => {
+        const availableSeats = await Seat.countDocuments({
+          busId: bus._id,
+          isBooked: false,
+        });
+        return { ...bus.toObject(), availableSeats };
+      })
+    );
 
-    return res.status(200).json(buses);
+    res.status(200).json(busDetailsWithSeats);
   } catch (error) {
-    console.error("Error fetching buses:", error);
-    res.status(500).send({ message: error.message });
+    console.error("Error searching buses:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
 // Get bus details by ID
 app.get("/bus/:busId", async (req, res) => {
   const { busId } = req.params;
@@ -227,7 +232,22 @@ app.post("/book-seat", async (req, res) => {
 function generateUniqueReference() {
   return Math.random().toString(36).substr(2, 9); // Example of generating a random alphanumeric string
 }
+app.get("/reservation", async (req, res) => {
+  const { busId, seatNumber } = req.query;
 
+  try {
+    const reservation = await Reservation.findOne({ busId, seatNumber });
+
+    if (!reservation) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+
+    res.status(200).json({ referenceNumber: reservation.referenceNumber });
+  } catch (error) {
+    console.error("Error fetching reservation details:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 // Endpoint to add a new bus
 app.post("/buses", async (req, res) => {
   const {

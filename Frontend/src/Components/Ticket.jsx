@@ -6,11 +6,13 @@ import line from "./assets/LIne.svg";
 import logo from "./assets/Bus.svg";
 import logoBg from "./assets/Bus.png";
 import Bar from "./assets/Bar.png";
+
 function Ticket() {
   const location = useLocation();
   const { busId, seatNumber } = location.state;
   const [busDetails, setBusDetails] = useState({});
   const [username, setUsername] = useState("");
+  const [referenceNumber, setReferenceNumber] = useState("");
 
   useEffect(() => {
     // Fetch the current user's username from the backend
@@ -32,6 +34,7 @@ function Ticket() {
   }, []);
 
   useEffect(() => {
+    // Fetch bus details
     const fetchBusDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/bus/${busId}`);
@@ -43,6 +46,25 @@ function Ticket() {
 
     fetchBusDetails();
   }, [busId]);
+
+  useEffect(() => {
+    // Fetch reservation details
+    const fetchReservationDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/reservation`, {
+          params: {
+            busId: busId,
+            seatNumber: seatNumber,
+          },
+        });
+        setReferenceNumber(response.data.referenceNumber); // Assuming the reservation data includes the reference number
+      } catch (error) {
+        console.error("Error fetching reservation details:", error);
+      }
+    };
+
+    fetchReservationDetails();
+  }, [busId, seatNumber]);
 
   return (
     <div className="TicketDiv">
@@ -60,6 +82,9 @@ function Ticket() {
 
       <label className="ticBusId">
         <strong>Name:</strong> {username}
+      </label>
+      <label className="ticReference">
+        <strong>Reference Number:</strong> {referenceNumber}
       </label>
       <label className="ticDeparture">
         <strong>Departure City:</strong> {busDetails.Departure_City}
