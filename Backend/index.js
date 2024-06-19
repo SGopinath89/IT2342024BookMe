@@ -8,11 +8,15 @@ const Booking = require("./Models/BookingSchema.js");
 const Seat = require("./Models/Seat.js");
 const authRoutes = require("./routes/auth.js");
 const Reservation = require("./Models/reservationModel.js");
+const bookingRoutes = require("./routes/bookingRoutes.js");
+
 const port = 8080;
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/auth", authRoutes);
+app.use("/booking", bookingRoutes); // Use the booking routes
+
 //const cors = require("cors");
 app.use(express.json());
 mongoose
@@ -132,17 +136,7 @@ app.post("/searchBuses", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-// Endpoint to get bookings for the logged-in user
-// app.get("/my-bookings", authenticateJWT, async (req, res) => {
-//   try {
-//     const bookings = await Booking.find({ bookedBy: req.user.id }).populate(
-//       "busId"
-//     );
-//     res.json(bookings);
-//   } catch (error) {
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
+
 // Get bus details by ID
 app.get("/bus/:busId", async (req, res) => {
   const { busId } = req.params;

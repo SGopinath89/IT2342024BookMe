@@ -56,7 +56,7 @@ function Header() {
               <a href="#">Bus TimeTable</a>
             </li>
             <li>
-              <a href="#">About Us</a>
+              <Link to="/Mybooking">My Bookings</Link>
             </li>
             <li>
               <a href="#">Contact</a>

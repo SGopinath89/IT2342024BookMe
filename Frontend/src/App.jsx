@@ -11,6 +11,7 @@ import Signup from "./Components/Signup";
 import Login from "./Components/Login";
 import { AuthProvider } from "./AuthContext";
 import AuthRoute from "./Auth/AuthRoute";
+import MyBookings from "./Components/MyBookings";
 
 function App() {
   const [searchCriteria, setSearchCriteria] = useState(null);
@@ -93,6 +94,16 @@ function App() {
           <Header />
           <Body />
           <Login />
+        </>
+      ),
+    },
+    {
+      path: "/Mybooking",
+      element: (
+        <>
+          <Header />
+          <Body />
+          <MyBookings />
         </>
       ),
     },
