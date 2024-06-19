@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const busModel = require("./Models/Bus.js");
-
 const mongoDBUrl = "mongodb://127.0.0.1:27017/BookMe";
 const Booking = require("./Models/BookingSchema.js");
 const Seat = require("./Models/Seat.js");
