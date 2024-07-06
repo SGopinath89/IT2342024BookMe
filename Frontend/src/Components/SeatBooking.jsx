@@ -11,8 +11,14 @@ function SeatBooking() {
   useEffect(() => {
     const fetchSeats = async () => {
       try {
+        const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
         const response = await axios.get(
-          `http://localhost:8080/seat-booking/${busId}`
+          `http://localhost:8080/bus/seat-booking/${busId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Add token to headers
+            },
+          }
         );
         setSeats(response.data);
       } catch (error) {

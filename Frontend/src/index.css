@@ -702,7 +702,7 @@ button:hover {
   line-height: normal;
   position: fixed;
   text-align: center;
-  top: 5%;
+  top: 8%;
   transform: rotate(89.89deg);
 }
 .ticDeparture {
@@ -796,6 +796,19 @@ button:hover {
   position: absolute;
   text-align: center;
   top: 62%;
+  transform: rotate(89.89deg);
+}
+.ticReference {
+  font-family: "Poppins-Light", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  height: 36px;
+  right: 0%;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 40%;
   transform: rotate(89.89deg);
 }
 .logoImage {

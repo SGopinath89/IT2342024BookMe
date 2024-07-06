@@ -10,8 +10,13 @@ function BusList() {
     const searchCriteria = location.state?.searchCriteria;
 
     if (searchCriteria) {
+      const token = localStorage.getItem("token");
       axios
-        .post("http://localhost:8080/searchBuses", searchCriteria)
+        .post("http://localhost:8080/bus/searchBuses", searchCriteria, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           console.log("Search Data Posted:", response.data);
           setSearchResults(response.data);
@@ -58,9 +63,8 @@ function BusList() {
             </div>
             <div className="busDetailRow">
               <label className="Seats">Available Seats: </label>
-              <span className="Seats-Text">{bus.Seat_No}</span>
+              <span className="Seats-Text">{bus.availableSeats}</span>
             </div>
-            {/* Other bus details */}
             <Link to={`/seat-booking/${bus._id}`} className="btnBookSeat">
               Book Seat
             </Link>

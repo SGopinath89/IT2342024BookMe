@@ -31,12 +31,12 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid password" });
     }
 
     const token = jwt.sign({ userId: user._id }, "your_jwt_secret", {
@@ -57,6 +57,19 @@ router.post("/login", async (req, res) => {
 });
 
 // Route to get current user's information
+router.get("/me", verifyToken, async (req, res) => {
+  try {
+    // Find user by ID retrieved from JWT payload
+    const user = await User.findById(req.user.userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({ name: user.name }); // Return only the name for the current user
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 router.get("/me", verifyToken, async (req, res) => {
   try {
     // Find user by ID retrieved from JWT payload
