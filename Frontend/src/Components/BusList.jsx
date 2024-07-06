@@ -10,8 +10,13 @@ function BusList() {
     const searchCriteria = location.state?.searchCriteria;
 
     if (searchCriteria) {
+      const token = localStorage.getItem("token");
       axios
-        .post("http://localhost:8080/searchBuses", searchCriteria)
+        .post("http://localhost:8080/bus/searchBuses", searchCriteria, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           console.log("Search Data Posted:", response.data);
           setSearchResults(response.data);

@@ -15,7 +15,8 @@ const verifyToken = (req, res, next) => {
 
     // Optionally, you can add user information to response headers if needed
     res.setHeader("X-User-Id", decoded.userId);
-
+    console.log(token);
+    console.log(decoded);
     next();
   } catch (err) {
     console.error(err.message);

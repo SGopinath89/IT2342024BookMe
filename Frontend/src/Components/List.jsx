@@ -15,22 +15,43 @@ function List({ setSearchCriteria }) {
 
   const fetchCities = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/cities");
+      const token = localStorage.getItem("token"); // Retrieve token from localStorage
+      const response = await axios.get("http://localhost:8080/bus/cities", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setCities(response.data);
     } catch (error) {
       console.error("Error fetching cities:", error);
+      // Handle error, e.g., redirect to login page or show an error message
     }
   };
 
-  const handleSearchBuses = (e) => {
+  const handleSearchBuses = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
     const searchData = {
       departureCity,
       arrivalCity,
       travelDate,
     };
-    setSearchCriteria(searchData);
-    navigate("/search-result", { state: { searchCriteria: searchData } });
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/bus/searchBuses",
+        searchData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setSearchCriteria(searchData);
+      navigate("/search-result", { state: { searchCriteria: searchData } });
+    } catch (error) {
+      console.error("Error searching buses:", error);
+      // Handle error, e.g., redirect to login page or show an error message
+    }
   };
 
   const today = new Date().toISOString().split("T")[0];

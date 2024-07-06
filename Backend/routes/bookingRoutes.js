@@ -1,20 +1,24 @@
 const express = require("express");
-const Booking = require("../Models/BookingSchema");
+const bookingRoutes = express.Router();
+const Booking = require("../Models/BookingSchema.js");
+const Seat = require("../Models/Seat.js");
 const verifyToken = require("../middleware/verifyToken");
+// Add booking routes here
+bookingRoutes.post("/addBooking", verifyToken, async (req, res) => {
+  const { busId, seatId, userId } = req.body;
 
-const router = express.Router();
+  const booking = new Booking({ bus: busId, seat: seatId, user: userId });
 
-// Endpoint to get bookings for the logged-in user
-router.get("/my-bookings", verifyToken, async (req, res) => {
   try {
-    const userId = req.user.userId; // Get the user ID from the token payload
-    const bookings = await Booking.find({ user: userId }).populate("bus seat");
+    const savedBooking = await booking.save();
+    await Seat.findByIdAndUpdate(seatId, { isBooked: true, bookedBy: userId });
 
-    res.status(200).json(bookings);
+    res.status(201).json(savedBooking);
   } catch (error) {
-    console.error("Error fetching bookings:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: error.message });
   }
 });
 
-module.exports = router;
+// Other booking-related routes
+
+module.exports = bookingRoutes;

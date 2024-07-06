@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import line from "./assets/LIne.svg";
 import logo from "./assets/Bus.svg";
 import logoBg from "./assets/Bus.png";
@@ -37,7 +36,15 @@ function Ticket() {
     // Fetch bus details
     const fetchBusDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/bus/${busId}`);
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `http://localhost:8080/bus/bus/${busId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setBusDetails(response.data);
       } catch (error) {
         console.error("Error fetching bus details:", error);
@@ -51,12 +58,19 @@ function Ticket() {
     // Fetch reservation details
     const fetchReservationDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/reservation`, {
-          params: {
-            busId: busId,
-            seatNumber: seatNumber,
-          },
-        });
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `http://localhost:8080/seat/reservation`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            params: {
+              busId: busId,
+              seatNumber: seatNumber,
+            },
+          }
+        );
         setReferenceNumber(response.data.referenceNumber); // Assuming the reservation data includes the reference number
       } catch (error) {
         console.error("Error fetching reservation details:", error);

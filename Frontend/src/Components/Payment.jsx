@@ -13,11 +13,16 @@ function Payment() {
     console.log("Payment submitted");
 
     try {
-      await axios.post("http://localhost:8080/book-seat", {
-        busId,
-        seatNumber,
-        userId,
-      });
+      const token = localStorage.getItem("token");
+      await axios.post(
+        "http://localhost:8080/seat/book-seat",
+        { busId, seatNumber, userId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       navigate("/ticket", { state: { busId, seatNumber } });
     } catch (error) {
