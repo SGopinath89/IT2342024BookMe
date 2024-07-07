@@ -8,7 +8,6 @@ const Bus = require("../Models/Bus.js");
 // Add booking routes here
 bookingRoutes.post("/addBooking", verifyToken, async (req, res) => {
   const { busId, seatId, userId } = req.body;
-
   const booking = new Booking({ bus: busId, seat: seatId, user: userId });
 
   try {
