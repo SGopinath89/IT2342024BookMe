@@ -5,20 +5,20 @@ const Reservation = require("../Models/reservationModel.js");
 const busModel = require("../Models/Bus.js");
 const verifyToken = require("../middleware/verifyToken");
 // Route to add a new seat
-seatRoutes.post("/addSeat", verifyToken, async (req, res) => {
-  const { seatNumber, busId } = req.body;
-  const seat = new Seat({ seatNumber });
+// seatRoutes.post("/addSeat", verifyToken, async (req, res) => {
+//   const { seatNumber, busId } = req.body;
+//   const seat = new Seat({ seatNumber });
 
-  try {
-    const savedSeat = await seat.save();
-    await busModel.findByIdAndUpdate(busId, {
-      $push: { seats: savedSeat._id },
-    });
-    res.status(201).json(savedSeat);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//   try {
+//     const savedSeat = await seat.save();
+//     await busModel.findByIdAndUpdate(busId, {
+//       $push: { seats: savedSeat._id },
+//     });
+//     res.status(201).json(savedSeat);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 // Route to book a seat
 seatRoutes.post("/book-seat", verifyToken, async (req, res) => {

@@ -15,39 +15,39 @@ busRoutes.get("/seat-booking/:busId", verifyToken, async (req, res) => {
 });
 
 // Route to add a new bus
-busRoutes.post("/buses", verifyToken, async (req, res) => {
-  const {
-    BusID,
-    Departure_City,
-    Departure_Time,
-    Arrival_City,
-    Arrival_Time,
-    Route_No,
-    Price,
-    Seat_No,
-    Travel_Date,
-  } = req.body;
+// busRoutes.post("/buses", verifyToken, async (req, res) => {
+//   const {
+//     BusID,
+//     Departure_City,
+//     Departure_Time,
+//     Arrival_City,
+//     Arrival_Time,
+//     Route_No,
+//     Price,
+//     Seat_No,
+//     Travel_Date,
+//   } = req.body;
 
-  const newBus = new busModel({
-    BusID,
-    Departure_City,
-    Departure_Time,
-    Arrival_City,
-    Arrival_Time,
-    Route_No,
-    Price,
-    Seat_No,
-    Travel_Date,
-    seats: [], // Assuming seats are initially empty
-  });
+//   const newBus = new busModel({
+//     BusID,
+//     Departure_City,
+//     Departure_Time,
+//     Arrival_City,
+//     Arrival_Time,
+//     Route_No,
+//     Price,
+//     Seat_No,
+//     Travel_Date,
+//     seats: [], // Assuming seats are initially empty
+//   });
 
-  try {
-    const savedBus = await newBus.save();
-    res.status(201).json(savedBus);
-  } catch (error) {
-    res.status(500).json({ message: "Error adding bus" });
-  }
-});
+//   try {
+//     const savedBus = await newBus.save();
+//     res.status(201).json(savedBus);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error adding bus" });
+//   }
+// });
 
 // Get bus details by ID
 busRoutes.get("/bus/:busId", verifyToken, async (req, res) => {
