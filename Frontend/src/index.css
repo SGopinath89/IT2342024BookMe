@@ -1038,3 +1038,23 @@ button:hover {
   background-color: #0056b3;
   height: 100px;
 }
+.bookings-container {
+  -webkit-backdrop-filter: blur(25px) brightness(100%);
+  backdrop-filter: blur(25px) brightness(100%);
+  position: absolute;
+  top: 80px;
+  left: 25%;
+  height: fit-content;
+  width: 50%;
+  font-family: "Poppins", Helvetica;
+  color: #ffffff;
+  justify-content: center;
+  text-align: center;
+}
+.bookings-container h2 {
+  text-align: center;
+  color: #ffffff;
+}
+.booking-details {
+  padding: 10px;
+}

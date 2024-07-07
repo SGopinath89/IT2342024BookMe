@@ -5,24 +5,25 @@ const Reservation = require("../Models/reservationModel.js");
 const busModel = require("../Models/Bus.js");
 const verifyToken = require("../middleware/verifyToken");
 // Route to add a new seat
-seatRoutes.post("/addSeat", verifyToken, async (req, res) => {
-  const { seatNumber, busId } = req.body;
-  const seat = new Seat({ seatNumber });
+// seatRoutes.post("/addSeat", verifyToken, async (req, res) => {
+//   const { seatNumber, busId } = req.body;
+//   const seat = new Seat({ seatNumber });
 
-  try {
-    const savedSeat = await seat.save();
-    await busModel.findByIdAndUpdate(busId, {
-      $push: { seats: savedSeat._id },
-    });
-    res.status(201).json(savedSeat);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//   try {
+//     const savedSeat = await seat.save();
+//     await busModel.findByIdAndUpdate(busId, {
+//       $push: { seats: savedSeat._id },
+//     });
+//     res.status(201).json(savedSeat);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 // Route to book a seat
 seatRoutes.post("/book-seat", verifyToken, async (req, res) => {
-  const { busId, seatNumber, userId } = req.body;
+  const { busId, seatNumber } = req.body;
+  const userId = req.user.userId; // Get the userId from the request object
 
   try {
     const bus = await busModel.findById(busId).populate("seats");
@@ -39,7 +40,7 @@ seatRoutes.post("/book-seat", verifyToken, async (req, res) => {
       return res.status(400).json({ message: "Seat already booked" });
     }
 
-    const referenceNumber = generateUniqueReference(); // Implement this function
+    const referenceNumber = generateUniqueReference();
     const reservation = new Reservation({
       busId,
       seatNumber,
@@ -61,7 +62,6 @@ seatRoutes.post("/book-seat", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 // Fetch reservation details
 seatRoutes.get("/reservation", verifyToken, async (req, res) => {
   const { busId, seatNumber } = req.query;
