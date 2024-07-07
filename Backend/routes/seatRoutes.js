@@ -22,7 +22,8 @@ seatRoutes.post("/addSeat", verifyToken, async (req, res) => {
 
 // Route to book a seat
 seatRoutes.post("/book-seat", verifyToken, async (req, res) => {
-  const { busId, seatNumber, userId } = req.body;
+  const { busId, seatNumber } = req.body;
+  const userId = req.user.userId; // Get the userId from the request object
 
   try {
     const bus = await busModel.findById(busId).populate("seats");
@@ -39,7 +40,7 @@ seatRoutes.post("/book-seat", verifyToken, async (req, res) => {
       return res.status(400).json({ message: "Seat already booked" });
     }
 
-    const referenceNumber = generateUniqueReference(); // Implement this function
+    const referenceNumber = generateUniqueReference();
     const reservation = new Reservation({
       busId,
       seatNumber,
@@ -61,7 +62,6 @@ seatRoutes.post("/book-seat", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 // Fetch reservation details
 seatRoutes.get("/reservation", verifyToken, async (req, res) => {
   const { busId, seatNumber } = req.query;

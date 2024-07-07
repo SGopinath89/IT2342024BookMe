@@ -100,11 +100,13 @@ function App() {
     {
       path: "/Mybooking",
       element: (
-        <>
-          <Header />
-          <Body />
-          <MyBookings />
-        </>
+        <AuthRoute>
+          <>
+            <Header />
+            <Body />
+            <MyBookings />
+          </>
+        </AuthRoute>
       ),
     },
   ]);
